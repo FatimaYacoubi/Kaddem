@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table( name ="DetailEquipe")
+@Getter
+@Setter
 public class DetailEquipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

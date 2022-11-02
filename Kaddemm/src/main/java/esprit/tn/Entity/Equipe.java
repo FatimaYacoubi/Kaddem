@@ -5,6 +5,8 @@ import java.util.List;
 
 @Entity
 @Table( name ="Equipe")
+@Getter
+@Setter
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,29 +21,6 @@ private List<Etudiant> EquipeEtds;
     public Equipe() {
     }
 
-    public int getIdEquipe() {
-        return idEquipe;
-    }
-
-    public void setIdEquipe(int idEquipe) {
-        this.idEquipe = idEquipe;
-    }
-
-    public String getNomEquipe() {
-        return nomEquipe;
-    }
-
-    public void setNomEquipe(String nomEquipe) {
-        this.nomEquipe = nomEquipe;
-    }
-
-    public Niveau getNiveau() {
-        return niveau;
-    }
-
-    public void setNiveau(Niveau niveau) {
-        this.niveau = niveau;
-    }
 }
 enum Niveau{
     JUNIOR,SENIOR,EXPERT
