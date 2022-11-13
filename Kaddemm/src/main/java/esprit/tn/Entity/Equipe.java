@@ -2,6 +2,8 @@ package esprit.tn.Entity;
 
 import javax.persistence.*;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table( name ="Equipe")
