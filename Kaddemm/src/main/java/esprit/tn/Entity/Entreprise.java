@@ -1,5 +1,8 @@
+package esprit.tn.Entity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import esprit.tn.Entity.Etudiant;
 import java.util.List;
 import lombok.*;
 @Entity
@@ -14,10 +17,8 @@ public class Entreprise implements Serializable {
     private String nomEntreprise;
     private String locEntreprise;
     private Integer nbPlaceRest;
-    @OneToMany(cascade = {CascadeType.ALL})
-    private Etudiant ContratEtudiant;
-    @ManyToOne(cascade = {CascadeType.ALL},mappedBy = "EntrepriseContrat")
-    private <List> Contrat ListContrats;
+    @OneToMany(cascade = {CascadeType.ALL},mappedBy = "EntrepriseContrat")
+    private List<Contrat> ListContrats;
 
 
 }
