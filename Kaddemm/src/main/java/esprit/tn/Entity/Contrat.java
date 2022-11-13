@@ -24,6 +24,8 @@ public class Contrat {
     private Boolean archive;
     @ManyToOne
     private Etudiant etudiantC;
+    @OneToMany
+    private Entreprise EntrepriseContrat;
     public Contrat() {
     }
     int montantContrat;
