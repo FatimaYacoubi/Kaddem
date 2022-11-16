@@ -31,8 +31,13 @@ public class JwtProvider implements IJwtProvider{
     @Override
     public String generateToken(UserPrincipal auth){
          String authorities = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining());
-         return Jwts.builder().setSubject(auth.getEmail()).claim("roles", authorities)
-                 .claim("userId", auth.getId())
+         return Jwts.builder()
+                 .setSubject(auth.getEmail())
+                 .claim("roles", authorities)
+                 .claim("username",auth.getUsername())
+                 .claim("IsBanned",auth.isAccountNonExpired())  //if return false that's mean he is banned
+                 .claim("IsVerified",auth.isAccountNonLocked()) //if return false that's mean he is not verified
+                 .claim("userId", auth.getId()) //Token Contents
                  .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
                  .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
                  .compact();

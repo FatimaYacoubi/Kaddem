@@ -22,6 +22,12 @@ public class InternalApiController {
     @PutMapping("/make-admin/{email}")
     public ResponseEntity<?> makeAdmin(@PathVariable String email){
         userService.makeAdmin(email);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("You Set new Admin",HttpStatus.OK);
+    }
+
+    @PutMapping ("/make-user/{email}")
+    public ResponseEntity<?> makeUser(@PathVariable String email){
+        userService.MakeUserRole(email);
+        return new ResponseEntity<>("Changed to User",HttpStatus.OK);
     }
 }

@@ -12,4 +12,8 @@ public class EtudDTO {
     private Contrat contrat;
     private Date dateDebutContrat;
     private Date dateFinContrat;
+    private String email;
+    private Boolean banned;
+    private Boolean verified;
+
 }

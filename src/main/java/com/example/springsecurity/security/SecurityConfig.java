@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeHttpRequests().antMatchers("/api/authentication/**").permitAll()
-                .antMatchers("/test/**").hasRole(Rolee.ADMIN.name())
+                .antMatchers("/api/admin/**").hasRole(Rolee.ADMIN.name())
                 .antMatchers("/api/internal/**").hasRole(Rolee.MANAGER.name())
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)

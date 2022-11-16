@@ -25,4 +25,16 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     @Modifying
     @Query("UPDATE Etudiant set role = :Role WHERE email= :email")
     void UpdateUserRole(@Param("email")String email,@Param("Role") Rolee Role);
+
+    @Modifying
+    @Query("UPDATE Etudiant set role = :Role WHERE email= :email")
+    void UpdateUserRoleUser(@Param("email")String email,@Param("Role") Rolee Role);
+
+    @Modifying
+    @Query("Update Etudiant  set banned = :banned WHERE email= :email ")
+    void BannUser(@Param("email")String email,@Param("banned") Boolean banned);
+
+    @Modifying
+    @Query("Update Etudiant  set verified = :verified WHERE email= :email ")
+    void VerifyUser(@Param("email")String email,@Param("verified") Boolean verified);
 }

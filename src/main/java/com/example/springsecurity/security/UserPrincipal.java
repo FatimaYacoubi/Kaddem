@@ -8,8 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Slf4j
 public class UserPrincipal implements UserDetails {
 
     private Long id;
@@ -53,11 +56,18 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
+       //check for banned
+        if(user.getBanned() == Boolean.TRUE){
+            log.error("User account is Banned");
+        return false;}
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+        if(user.getVerified() == Boolean.FALSE){
+            log.error("User account is not verified");
+            return false;}
         return true;
     }
 
