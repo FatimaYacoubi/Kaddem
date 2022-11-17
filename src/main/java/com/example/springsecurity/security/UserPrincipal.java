@@ -58,7 +58,7 @@ public class UserPrincipal implements UserDetails {
     public boolean isAccountNonExpired() {
        //check for banned
         if(user.getBanned() == Boolean.TRUE){
-            log.error("User account is Banned");
+            log.info("User account is Banned");
         return false;}
         return true;
     }
@@ -66,7 +66,7 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isAccountNonLocked() {
         if(user.getVerified() == Boolean.FALSE){
-            log.error("User account is not verified");
+            log.info("User account is not verified");
             return false;}
         return true;
     }
