@@ -1,5 +1,7 @@
 package esprit.tn.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,17 +21,30 @@ public class Contrat {
     @Temporal(TemporalType.DATE)
 
     private Date datefinContrat;
-    @Enumerated(EnumType.STRING)
     private Specialite specialite;
     private Boolean archive;
-    @ManyToOne
+    private String descriptionContrat;
+    @ManyToOne(cascade=CascadeType.ALL)
     private Etudiant etudiantC;
+    @JsonIgnore
+
+    @Column(nullable = true)
+    private String nomEC;
+@JsonIgnore
+    public String getNomEC() {
+        return nomEC=etudiantC.getNomE();
+    }
+    @JsonIgnore
+    public void setNomEC(String nomEC) {
+        this.nomEC = nomEC;
+    }
     @ManyToOne
+
     private Entreprise EntrepriseContrat;
     public Contrat() {
     }
-    int montantContrat;
+    private int montantContrat;
+
+
 }
-enum Specialite {
-    IA,RESEAUX,CLOUD,SECURITE;
-}
+

@@ -1,9 +1,10 @@
 package esprit.tn.Entity;
 
-import javax.persistence.*;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table( name ="Equipe")
@@ -12,14 +13,15 @@ import lombok.Setter;
 public class Equipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idEquipe")
+    @Column(name = "idEquipe")
     private int idEquipe;
     private String nomEquipe;
     private Niveau niveau;
-@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "EtdEquipe")
-private List<Etudiant> EquipeEtds;
-  @OneToOne(cascade = {CascadeType.ALL})
-  private DetailEquipe EquipeDetail;
+    @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "EtdEquipe")
+    private List<Etudiant> EquipeEtds;
+    @OneToOne(cascade = {CascadeType.ALL})
+    private DetailEquipe EquipeDetail;
+
     public Equipe() {
     }
 

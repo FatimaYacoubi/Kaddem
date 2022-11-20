@@ -1,5 +1,6 @@
 package esprit.tn.Entity;
 
+import esprit.tn.Service.IDepartementService;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +19,6 @@ public class Universite {
     private String nomUniv;
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Departement> depU;
+
+
 }

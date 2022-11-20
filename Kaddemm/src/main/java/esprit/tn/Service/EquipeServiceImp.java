@@ -10,5 +10,33 @@ import java.util.List;
 @Service
 @Slf4j
 public class EquipeServiceImp implements IEquipeService{
+    @Autowired
+    EquipeRepository EquipeRepository;
+    public Integer ajouter_Equipe(Equipe e)
+    {
+        EquipeRepository.save(e);
+        log.info("ajouter Equiper");
+        return (1);
+    }
+    public String delete_Equipe(Integer id) {
+        EquipeRepository.deleteById(id);
+        log.info("deleted ");
+        return "DEleted";
+    }
+
+    public List<Equipe> Equipe_List() {
+        return EquipeRepository.findAll();
+
+    }
+
+    public void update_Equipe(Equipe e) {
+        EquipeRepository.save(e);
+
+    }
+
+    public String deleteAllE() {
+        EquipeRepository.deleteAll();
+        return "deleted";
+    }
 
 }
