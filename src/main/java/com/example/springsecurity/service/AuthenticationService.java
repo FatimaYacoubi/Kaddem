@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthenticationService implements IAuthenticationService {
@@ -20,13 +21,15 @@ public class AuthenticationService implements IAuthenticationService {
     private IJwtProvider jwtProvider;
 
     @Override
+    @Transactional
     public Etudiant SignInAndReturnJWT(Etudiant signInRequest){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword()));
 
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         String jwt = jwtProvider.generateToken(userPrincipal);
         Etudiant signInUser = userPrincipal.getUser();
-    signInUser.setToken(jwt);
+        signInUser.setActive(true);
+        signInUser.setToken(jwt);
 
     return signInUser;
     }

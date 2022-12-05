@@ -28,6 +28,13 @@ public class CustomUserDetaisService implements UserDetailsService {
         Set<GrantedAuthority> authorities =
         new HashSet<>(Arrays.asList(SecurityUtils.convertToAuthority(user.getRole().name())));
 
-        return UserPrincipal.builder().user(user).id(user.getIdEtudiant()).email(username).password(user.getPassword()).authoroties(authorities).build();
+        return UserPrincipal.builder()
+                .user(user)
+                .id(user.getIdEtudiant())
+                .email(username)
+                .active(user.getActive())
+                .password(user.getPassword())
+                .authoroties(authorities)
+                .build();
     }
 }

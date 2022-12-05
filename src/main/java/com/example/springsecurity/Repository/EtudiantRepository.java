@@ -37,4 +37,6 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     @Modifying
     @Query("Update Etudiant  set verified = :verified WHERE email= :email ")
     void VerifyUser(@Param("email")String email,@Param("verified") Boolean verified);
+
+
 }

@@ -9,7 +9,6 @@ import java.util.Date;
 public class EtudDTO {
     private String nom;
     private String prenom;
-    private Contrat contrat;
     private Date dateDebutContrat;
     private Date dateFinContrat;
     private String email;

@@ -40,9 +40,8 @@ public class Etudiant implements Serializable {
     private LocalDateTime createdate;
     @Enumerated(EnumType.STRING)
     @Column(name="Roleee")
-    @Lazy
     private Rolee role;
-
+    private Boolean active;
     @OneToMany(mappedBy = "etudiant"
     )
 
@@ -61,6 +60,7 @@ public class Etudiant implements Serializable {
     private Set<Tache> tahces;
 
     // Constructeur et accesseurs (getters) et mutateurs (setters)
+
 
 
 }

@@ -27,6 +27,7 @@ public class UserPrincipal implements UserDetails {
 
     private Long id;
     private String email;
+    private Boolean active;
 
     transient private String password;
     transient private Etudiant user;
@@ -80,4 +81,7 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
 }

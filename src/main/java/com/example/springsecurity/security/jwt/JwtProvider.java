@@ -28,6 +28,7 @@ public class JwtProvider implements IJwtProvider{
     @Value("${app.jwt.expiration-in-ms}")
     private int JWT_EXPIRATION_IN_MS;
 
+
     @Override
     public String generateToken(UserPrincipal auth){
          String authorities = auth.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining());
@@ -38,8 +39,9 @@ public class JwtProvider implements IJwtProvider{
                  .claim("IsBanned",auth.isAccountNonExpired())  //if return false that's mean he is banned
                  .claim("IsVerified",auth.isAccountNonLocked()) //if return false that's mean he is not verified
                  .claim("userId", auth.getId()) //Token Contents
+                 .claim("isActive",auth.getActive())
                  .setExpiration(new Date(System.currentTimeMillis() + JWT_EXPIRATION_IN_MS))
-                 .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
+                 .signWith( SignatureAlgorithm.HS512,JWT_SECRET)
                  .compact();
     }
 
