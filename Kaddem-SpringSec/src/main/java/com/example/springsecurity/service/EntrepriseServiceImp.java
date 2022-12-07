@@ -35,4 +35,19 @@ public class EntrepriseServiceImp implements IEntrepriseService {
         entrepriseRepository.deleteById(id);
         return "DEleted";
     }
+    public final static double AVERAGE_RADIUS_OF_EARTH_KM = 6371;
+    public int calculateDistanceInKilometer(Entreprise e) {
+
+        double latDistance = Math.toRadians(e.getLatitude() - 36.24255502127699);
+        double lngDistance = Math.toRadians(e.getLongitude() - 9.476723745103257);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(e.getLatitude())) * Math.cos(Math.toRadians( 36.24255502127699))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH_KM * c));
+    }
+
 }

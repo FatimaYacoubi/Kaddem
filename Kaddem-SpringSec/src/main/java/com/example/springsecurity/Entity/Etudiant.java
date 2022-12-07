@@ -1,4 +1,5 @@
 package com.example.springsecurity.Entity;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 
@@ -42,9 +43,8 @@ public class Etudiant implements Serializable {
     @Column(name="Roleee")
     private Rolee role;
     private Boolean active;
-    @OneToMany(mappedBy = "etudiantC"
-    )
-
+    @JsonBackReference
+    @OneToMany(mappedBy = "etudiantC")
     private Set<Contrat> contrat;
 
     @ManyToMany(mappedBy = "etudiant")

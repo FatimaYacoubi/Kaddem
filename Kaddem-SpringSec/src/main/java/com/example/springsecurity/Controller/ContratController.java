@@ -14,6 +14,7 @@ import com.example.springsecurity.service.IContratService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -47,7 +48,6 @@ public class ContratController {
     public Contrat addContrat(@RequestBody Contrat contrat)
     {
 
-        contratrepo.save(contrat);
         contratService.ajouter_contrat(contrat);
 
 
@@ -157,5 +157,11 @@ return contratService.getPercentageGroupBySpecialite();
                 = emailService.sendMailWithAttachment(details);
 
         return status;
+    }
+
+    @GetMapping("/titi/{id}")
+    public ResponseEntity<?> ShowUser(@PathVariable("id") Long id){
+        contratService.getcontratbyidetudiant(id);
+        return new ResponseEntity<>(contratService.getcontratbyidetudiant(id), HttpStatus.OK);
     }
 }

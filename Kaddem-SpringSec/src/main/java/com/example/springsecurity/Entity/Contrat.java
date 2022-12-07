@@ -1,9 +1,7 @@
 package com.example.springsecurity.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 
 import javax.persistence.*;
@@ -13,6 +11,8 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
+
 public class Contrat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,18 +26,10 @@ public class Contrat {
     private Specialite specialite;
     private Boolean archive;
     private String descriptionContrat;
-
-    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.ALL },fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.MERGE },fetch = FetchType.EAGER)
     private Etudiant etudiantC;
-    @JsonIgnore
-
-    @Column(nullable = true)
-    private String nomEC;
-
     @ManyToOne(cascade = {CascadeType.MERGE },fetch = FetchType.LAZY)
     private Entreprise  EntrepriseContrat;
-    public Contrat() {
-    }
     private int montantContrat;
     public double getComissionContrat()
     { double comission = montantContrat*0.4;

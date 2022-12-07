@@ -1,5 +1,6 @@
 package com.example.springsecurity.service;
 import com.example.springsecurity.Entity.Contrat;
+import com.example.springsecurity.Entity.Etudiant;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -15,4 +16,8 @@ public interface IContratService {
     Contrat addContrat(Contrat contrat);
 
     List<Contrat> getPercentageGroupBySpecialite();
+
+    List <Contrat>getcontratbyidetudiant(Long id);
+
+    Etudiant AssignEtudiantToContrat(Long idEtudiant, int idContrat);
 }

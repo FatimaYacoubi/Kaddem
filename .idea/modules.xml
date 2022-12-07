@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Kaddem.iml" filepath="$PROJECT_DIR$/.idea/Kaddem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kaddem-SpringSec/SpringSecurity.iml" filepath="$PROJECT_DIR$/Kaddem-SpringSec/SpringSecurity.iml" />
     </modules>
   </component>
 </project>

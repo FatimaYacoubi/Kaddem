@@ -14,4 +14,6 @@ public interface ContratRepository extends JpaRepository<Contrat, Integer> {
     public List<Contrat> getPercentageGroupBySpecialite();
 
     List<Contrat> findContratBySpecialite(Specialite specialite);
+
+    List<Contrat> findContratByEtudiantCIdEtudiant(Long id);
 }

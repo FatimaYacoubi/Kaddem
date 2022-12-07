@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 
-@RequestMapping("/Entreprise")
+@RequestMapping("/api/authentication")
 public class EntrepriseController {
     @Autowired
     EntrepriseServiceImp entrserv;
@@ -23,8 +23,10 @@ public class EntrepriseController {
     @ResponseBody
     public Entreprise addEntreprise(@RequestBody Entreprise E)
     {
-    entrserv.ajouter_entreprise(E);
-    return(E);
+    E.setDistance(entrserv.calculateDistanceInKilometer(E));
+        entrserv.ajouter_entreprise(E);
+
+        return(E);
     }
     @CrossOrigin(origins = "*")
     @PutMapping("/updateEntreprise")
@@ -61,5 +63,13 @@ public class EntrepriseController {
     public Entreprise FindEntrepriseparID(@PathVariable int idEntreprise)
     {
        return (entrepriseRepository.findById(idEntreprise)).get();
+    }
+    @CrossOrigin(origins = "*")
+    @PostMapping("/distance")
+    @ResponseBody
+    public int distance(@RequestBody Entreprise E)
+    {
+        return entrserv.calculateDistanceInKilometer(E);
+
     }
 }
