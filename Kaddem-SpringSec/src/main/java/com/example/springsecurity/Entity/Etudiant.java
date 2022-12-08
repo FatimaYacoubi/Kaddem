@@ -47,7 +47,7 @@ public class Etudiant implements Serializable {
     @OneToMany(mappedBy = "etudiantC")
     private Set<Contrat> contrat;
 
-    @ManyToMany(mappedBy = "etudiant")
+    @ManyToMany(mappedBy = "etudiants")
     private Set<Equipe> equipe;
     @ManyToMany(mappedBy = "etudiants")
     private Set<Role> Roles;

@@ -7,10 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="DetailEquipe")
+@Table( name ="DetailEquipe")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class DetailEquipe implements Serializable {
@@ -19,12 +18,10 @@ public class DetailEquipe implements Serializable {
     @Column(name="idDetailEquipe")
     private Long idDetailEquipe; // Clé primaire
 
-    private int salle;
+    private Long salle;
     private String thematique;
 
-    @JsonBackReference
-    @OneToOne(mappedBy = "detailequipe")
+    @OneToOne
     private Equipe equipe;
-
 
 }
