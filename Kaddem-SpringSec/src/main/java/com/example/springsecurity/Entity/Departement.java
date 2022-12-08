@@ -1,32 +1,39 @@
 package com.example.springsecurity.Entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
+import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-
-@Entity
-@Table(name="Department")
-@Getter
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Departement implements Serializable {
+@Entity
+@Table( name ="Departement")
+public class Departement implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column(name="idDepart")
-    private Long idDepart;
+    private Long idDepart; // Clé primaire
     private String nomDepart;
+/*
+    @JsonIgnore
+    @OneToMany( )
+    private Set<Etudiant> etudiants;
+
+    */
 
     @OneToMany(mappedBy = "departement")
-    @JsonBackReference
-    private Set<Etudiant> etudiant;
+    @JsonIgnore
+    List<Etudiant> etudiantList;
+
+    @OneToMany( mappedBy="departementsProf",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Professeur>   professeurs;
 
 
 }

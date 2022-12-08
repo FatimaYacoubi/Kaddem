@@ -1,12 +1,16 @@
 package com.example.springsecurity.Repository;
 
-
 import com.example.springsecurity.Entity.Universite;
+import org.hibernate.sql.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository
-public interface UniversiteRepository extends JpaRepository<Universite, Long> {
+import java.util.List;
+import java.util.Optional;
+
+
+public interface UniversiteRepository  extends JpaRepository<Universite, Long> {
+   Universite  findByEmail(String email);
 
 
 }
