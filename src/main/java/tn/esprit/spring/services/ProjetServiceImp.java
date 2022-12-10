@@ -1,24 +1,30 @@
 package tn.esprit.spring.services;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Projet;
+import tn.esprit.spring.entity.ProjetDetail;
+import tn.esprit.spring.repositories.ProjetDetailRepository;
 import tn.esprit.spring.repositories.ProjetRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class ProjetServiceImp implements IProjet {
 
-    @Autowired
-    ProjetRepository projetRepository;
-    @Override
-    public Long ajouter_projet(Projet p) {
+    private ProjetRepository projetRepository;
 
+    private ProjetDetailRepository projetDetailRepository;
+
+
+    @Override
+    public Long ajouter_projet(Projet p,Long idProjetdetail) {
+        ProjetDetail prodet = projetDetailRepository.findById(idProjetdetail).get();
+        p.setProjetDetail(prodet);
         projetRepository.save(p);
         log.info("ajouter Projet");
         return p.getIdProjet();
@@ -29,15 +35,16 @@ public class ProjetServiceImp implements IProjet {
         return projetRepository.findAll();
     }
 
+
     @Override
     @Transactional
     public Projet updateProjet(Projet p) {
         List<Projet> proj = retrieveAllProjets();
         for(Projet r:proj){
-            if(p.getIdProjet()==p.getIdProjet()){
-                r.setProjetDetail(p.getProjetDetail());
+            if(r.getIdProjet()==p.getIdProjet()){
                 r.setSujet(p.getSujet());
                 r.setEtat(p.getEtat());
+                projetRepository.save(r);
                 return r;
             }
         }
@@ -54,6 +61,8 @@ public class ProjetServiceImp implements IProjet {
       Projet p = retrieveProjet(idProjet);
         projetRepository.delete(p);
     }
+
+
 
 
 }

@@ -3,7 +3,6 @@ package tn.esprit.spring.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.Departement;
-import tn.esprit.spring.entity.Etudiant;
 import tn.esprit.spring.entity.Universite;
 import tn.esprit.spring.repositories.DepartmentRepository;
 import tn.esprit.spring.repositories.UniversiteRepository;

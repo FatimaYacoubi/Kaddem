@@ -1,13 +1,14 @@
 package tn.esprit.spring.services;
 
 import tn.esprit.spring.entity.Projet;
+import tn.esprit.spring.entity.ProjetDetail;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IProjet {
 
-    public Long     ajouter_projet(Projet p);
+    public Long ajouter_projet(Projet p,Long idProjetdetail);
 
     List<Projet> retrieveAllProjets();
 
@@ -16,4 +17,6 @@ public interface IProjet {
     Projet retrieveProjet(Long idProjet);
 
     void removeProjet(Long idProjet);
+
+
 }

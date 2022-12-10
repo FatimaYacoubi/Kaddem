@@ -1,17 +1,19 @@
 package tn.esprit.spring.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entity.Projet;
 import tn.esprit.spring.services.IProjet;
 
 import java.util.List;
-
+@CrossOrigin(origins ="*" )
 @RestController
 @RequestMapping("/ProjetC")
+@AllArgsConstructor
 public class ProjetController {
-    @Autowired
-    IProjet iProjet;
+
+   private IProjet iProjet;
 
     @GetMapping("/getallProjets")
     @ResponseBody
@@ -22,11 +24,11 @@ public class ProjetController {
 
 
 
-    @PostMapping("/addProjet")
+    @PostMapping("/addProjet/{idProjetdetail}")
     @ResponseBody
-    public Projet addEtudiant(@RequestBody Projet projet)
+    public Projet addProjets(@RequestBody Projet projet,@PathVariable Long idProjetdetail)
     {
-        iProjet.ajouter_projet(projet);
+        iProjet.ajouter_projet(projet,idProjetdetail);
 
         return projet;
     }
@@ -34,24 +36,28 @@ public class ProjetController {
 
     @PutMapping("/updateProjet")
     @ResponseBody
-    public Projet updateEtudiant(@RequestBody Projet projet)
+    public Projet updateProjets(@RequestBody Projet projet)
     {
         iProjet.updateProjet(projet);
         return  projet;
     }
 
-    @DeleteMapping("/deleteProjet")
+    @DeleteMapping("/deleteProjet/{idprojet}")
     @ResponseBody
-    public void removeEtudiant(Long idprojet)
+    public void removeProjets(@PathVariable Long idprojet)
     {
         iProjet.removeProjet(idprojet);
     }
 
-    @GetMapping("/getProjetbyid/{id}")
+    @GetMapping("/getProjetbyid/{idprojet}")
     @ResponseBody
-    public Projet retrieveEtudiant(Long idprojet)
+    public Projet retrieveProjets(@PathVariable Long idprojet)
     {
         return iProjet.retrieveProjet(idprojet);
 
     }
+
+
+
+
 }

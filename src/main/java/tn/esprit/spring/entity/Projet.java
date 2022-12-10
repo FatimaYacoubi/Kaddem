@@ -1,5 +1,6 @@
 package tn.esprit.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,7 +26,10 @@ public class Projet implements Serializable {
     @Column(name = "PROJET_ETAT")
     private String etat;
 
-    @OneToOne
-    private tn.esprit.spring.entity.ProjetDetail projetDetail;
+
+
+
+    @OneToOne(cascade = CascadeType.ALL )
+    private ProjetDetail projetDetail;
 
 }

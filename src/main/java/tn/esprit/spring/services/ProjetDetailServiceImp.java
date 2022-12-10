@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import tn.esprit.spring.entity.ProjetDetail;
 import tn.esprit.spring.repositories.ProjetDetailRepository;
 
+import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +30,7 @@ public class ProjetDetailServiceImp implements IProjetDetail{
     }
 
     @Override
+    @Transactional
     public ProjetDetail updateProjetDetail(ProjetDetail e) {
         List<ProjetDetail> etud = retrieveAllProjetDetails();
         for(ProjetDetail r:etud){
@@ -37,7 +40,6 @@ public class ProjetDetailServiceImp implements IProjetDetail{
                 r.setTechnologie(e.getTechnologie());
                 r.setDateDebut(e.getDateDebut());
                 r.setDateLimite(e.getDateLimite());
-                r.setProjet(e.getProjet());
                 return r;
             }
         }
@@ -57,5 +59,14 @@ public class ProjetDetailServiceImp implements IProjetDetail{
 
     }
 
+    @Override
+    public List<ProjetDetail> retrieveAllProjetDetailsbytechnologieanddescription(String techno,String desc) {
+        return projetDetailRepository.findByTechnologieContainsOrDescriptionContains(techno,desc);
+    }
+
+    @Override
+    public List<ProjetDetail> findByDateDebutBetween(Date datedeb,Date datefin) {
+        return projetDetailRepository.findByDateDebutBetween(datedeb,datefin);
+    }
 
 }
