@@ -7,10 +7,11 @@ import com.example.springsecurity.Repository.ContratRepository;
 import com.example.springsecurity.Repository.EtudiantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import static org.springframework.data.domain.PageRequest.of;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -91,8 +92,7 @@ return contratRepository.save(c);
 
        // return null;
     //}
-       public void showall() {
-       }
+
        public List <Contrat>getPercentageGroupBySpecialite()
        {
            return contratRepository.getPercentageGroupBySpecialite();
@@ -109,6 +109,12 @@ return contratRepository.save(c);
         contratentity.setEtudiantC(etudiantentity);
         contratRepository.save(contratentity);
         return (etudiantentity);
+    }
+    @Override
+    public Page<Contrat> getContrats(String description, int page, int size)
+    { log.info("fetching contrats from page {} of size {}",page,size);
+       return contratRepository.findContratByDescriptionContratContaining(description, of(page, size));
+
     }
 
 }

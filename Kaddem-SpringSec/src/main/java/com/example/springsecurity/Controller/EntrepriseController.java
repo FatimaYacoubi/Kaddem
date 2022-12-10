@@ -1,13 +1,18 @@
 package com.example.springsecurity.Controller;
 
 
+import com.example.springsecurity.Entity.Contrat;
 import com.example.springsecurity.Entity.Entreprise;
+import com.example.springsecurity.Entity.Response;
 import com.example.springsecurity.Repository.EntrepriseRepository;
 import com.example.springsecurity.service.EntrepriseServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -72,4 +77,22 @@ public class EntrepriseController {
         return entrserv.calculateDistanceInKilometer(E);
 
     }
-}
+
+    @GetMapping("/findAllEnPaginate")
+
+    public Response getContrats(@RequestParam Optional<String> Specialite,
+                                @RequestParam Optional<Integer> page,
+                                @RequestParam Optional<Integer> size)
+    {
+        Page<Entreprise> entreprises = null;
+        entreprises= entrepriseRepository.findAll(
+                PageRequest.of(
+                        page.orElse(0),
+                        size.orElse(10)
+                )
+        );
+        Response res = new Response(entreprises.getContent(), entreprises.getTotalPages(),
+                entreprises.getNumber(), entreprises.getSize(),1);
+
+        return res;
+    } }

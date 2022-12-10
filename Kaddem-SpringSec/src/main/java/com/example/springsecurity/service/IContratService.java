@@ -1,6 +1,7 @@
 package com.example.springsecurity.service;
 import com.example.springsecurity.Entity.Contrat;
 import com.example.springsecurity.Entity.Etudiant;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface IContratService {
     List <Contrat>getcontratbyidetudiant(Long id);
 
     Etudiant AssignEtudiantToContrat(Long idEtudiant, int idContrat);
+
+    Page<Contrat> getContrats(String description, int page, int size);
 }

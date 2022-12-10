@@ -3,7 +3,7 @@ package com.example.springsecurity.Controller;
 
 import com.example.springsecurity.Entity.Contrat;
 import com.example.springsecurity.Entity.EmailEntrepriseContrat;
-import com.example.springsecurity.Entity.Etudiant;
+import com.example.springsecurity.Entity.Response;
 import com.example.springsecurity.Entity.Specialite;
 import com.example.springsecurity.Repository.ContratRepository;
 import com.example.springsecurity.Repository.EtudiantRepository;
@@ -13,18 +13,29 @@ import com.example.springsecurity.service.ExportContratService;
 import com.example.springsecurity.service.IContratService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import static java.time.LocalDateTime.now;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.data.domain.PageRequest.of;
+
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -164,4 +175,21 @@ return contratService.getPercentageGroupBySpecialite();
         contratService.getcontratbyidetudiant(id);
         return new ResponseEntity<>(contratService.getcontratbyidetudiant(id), HttpStatus.OK);
     }
-}
+    @GetMapping("/findAllEPaginate")
+
+    public Response getContrats(@RequestParam Optional<String> Specialite,
+                                                   @RequestParam Optional<Integer> page,
+                                                   @RequestParam Optional<Integer> size)
+    {
+        Page<Contrat> contrats = null;
+       contrats= contratrepo.findAll(
+                PageRequest.of(
+                        page.orElse(0),
+                        size.orElse(10)
+                )
+        );
+        Response res = new Response(contrats.getContent(), contrats.getTotalPages(),
+                contrats.getNumber(), contrats.getSize());
+
+        return res;
+} }

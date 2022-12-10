@@ -9,7 +9,7 @@ import javax.persistence.*;
 // Annotations
 @Entity
 @Table( name ="EmailEntrepriseContrat")
-@Getter
+@Getter    
 @Setter
 public class EmailEntrepriseContrat {
     @Id

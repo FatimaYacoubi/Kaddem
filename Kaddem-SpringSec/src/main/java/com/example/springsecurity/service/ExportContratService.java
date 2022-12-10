@@ -64,7 +64,7 @@ System.out.println(columns.length);
         try {
             PdfWriter.getInstance(document, out);
             document.open();
-            com.itextpdf.text.Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.BLACK);
+            com.itextpdf.text.Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN, 14, BaseColor.WHITE);
             Paragraph para = new Paragraph("Liste des Contrats", font);
             para.setAlignment(Element.ALIGN_CENTER);
             document.add(para);
@@ -179,7 +179,7 @@ else
             sheet.autoSizeColumn(columns.length);
             Font headerFont = workbook.createFont();
             headerFont.setBold(true);
-            headerFont.setColor(IndexedColors.BLACK.getIndex());
+            headerFont.setColor(IndexedColors.WHITE.getIndex());
             CellStyle cellStyle = workbook.createCellStyle();
             cellStyle.setFont(headerFont);
             Row headerRow= sheet.createRow(0);

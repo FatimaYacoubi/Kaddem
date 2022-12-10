@@ -48,7 +48,7 @@ cell.setCellValue(contrat.getIdContrat());
     cell = row.createCell(1);
     cell.setCellValue(contrat.getMontantContrat()+"dt");
      cell = row.createCell(3);
-    cell.setCellValue(contrat.getEtudiantC().getIdEtudiant());
+    cell.setCellValue(contrat.getEtudiantC().getNomE());
 
     cell = row.createCell(2);
     cell.setCellValue(contrat.getComissionContrat()+"dt");
