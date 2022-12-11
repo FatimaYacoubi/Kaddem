@@ -35,8 +35,9 @@ public class OffreServiceImp implements IoffreService{
 
 
 
-    public Long ajouterOffre(Offre o ) {
-
+    public Long ajouterOffre(Offre o , Long idPar) {
+        Partenaire par =partenaireRepository.findById(idPar).orElse(null);
+        o.setListpartenaire(par);
         offreRepository.save(o);
         log.info("Ajouter Offre");
 
@@ -45,12 +46,13 @@ public class OffreServiceImp implements IoffreService{
                 "Nos services ont par conséquent pu acquérir l’expérience et la compétence pour étudier, planifier, estimer le budget nécessaire à de telles opérations et ainsi vous transmettre un devis en 48 heures. \n"
                 ,"S'inscrire Maintenant", "http://localhost:4200" );
 
-            emailService.sendEmail(mailRequest);
+        emailService.sendEmail(mailRequest);
 
 
 
-            return o.getIdOffre();
+        return o.getIdOffre();
     }
+
     @Override
     public Iterable<Offre> retrieveAllOffre() {return offreRepository.findAll();}
 

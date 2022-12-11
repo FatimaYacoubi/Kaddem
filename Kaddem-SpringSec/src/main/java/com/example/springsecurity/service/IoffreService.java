@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IoffreService {
 
-    public Long ajouterOffre(Offre o);
+    public Long ajouterOffre(Offre o, Long id);
     public Iterable<Offre> retrieveAllOffre();
     Offre retrieveOffre(Long idOffre);
 

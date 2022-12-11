@@ -34,6 +34,13 @@ public class Response {
     public List<Contrat> getContrats() {
         return this.contrats;
     }
+    public void setEntreprises(List<Entreprise> entreprises) {
+        this.entreprises = entreprises;
+    }
+
+    public List<Entreprise> getEntreprises() {
+        return this.entreprises;
+    }
 
     public void setTotalPages(int totalPages) {
         this.totalPages = totalPages;

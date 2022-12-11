@@ -59,7 +59,7 @@ private  JavaMailSender javaMailSender;
     }
     @Async
 
-    public String sendMailWithAttachment(EmailEntrepriseContrat details) {
+    public String sendMailWithAttachment(String to) {
         // Creating a mime message
         MimeMessage mimeMessage
                 = javaMailSender.createMimeMessage();
@@ -72,15 +72,15 @@ private  JavaMailSender javaMailSender;
             mimeMessageHelper
                     = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(sender);
-            mimeMessageHelper.setTo(details.getRecipient());
-            mimeMessageHelper.setText(details.getMsgBody());
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setText("Vous Avez Reçu une demande de contrat, Contactez nous pour plus D'informations. /n -Kaddem.");
             mimeMessageHelper.setSubject(
-                    details.getSubject());
+                   " Ceci est un contrat Dédier a vous , vous pouvez choisir de l'accepter ou le refusez! ");
 
             // Adding the attachment
             FileSystemResource file
                     = new FileSystemResource(
-                    new File(details.getAttachment()));
+                    new File(""));
 
             mimeMessageHelper.addAttachment(
                     file.getFilename(), file);

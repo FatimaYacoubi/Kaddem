@@ -35,11 +35,11 @@ public class OffreController {
         return ioffreService.retrieveOffre(OffreId);
     }
 
-    @PostMapping("/addOffre")
+    @PostMapping("/addOffre/{idPar}")
     @ResponseBody
     @CrossOrigin(origins = "http://localhost:4200")
-    public void addOffre(@RequestBody Offre o ) {
-        ioffreService.ajouterOffre(o);
+    public void addOffre(@RequestBody Offre o, @PathVariable("idPar") Long iDPar ) {
+        ioffreService.ajouterOffre(o , iDPar);
     }
 
     @PutMapping("/updateOffre")

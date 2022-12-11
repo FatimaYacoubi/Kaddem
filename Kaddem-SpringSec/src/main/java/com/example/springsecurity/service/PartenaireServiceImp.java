@@ -37,17 +37,8 @@ public class PartenaireServiceImp implements IpartenaireService{
         partenaireRepository.deleteById(id);}
 
     @Override
-    public Partenaire updatePartenaire(Partenaire p , Long idPar) {
-       Partenaire par = partenaireRepository.findById(idPar).get();
-       par.setNomPartenaire(p.getNomPartenaire());
-        par.setLocalisation(p.getLocalisation());
-        par.setNumTelPar(p.getNumTelPar());
-        par.setMobilite(p.isMobilite());
-        par.setSupport(p.getSupport());
-        par.setEmail(p.getEmail());
-        par.setUniversites(p.getUniversites());
-
-        return partenaireRepository.save(par);}
+    public Partenaire updatePartenaire(Partenaire p) {
+        return partenaireRepository.save(p);}
 
     @Override
     public Partenaire retrievePartenaire(Long idPartenaire) {

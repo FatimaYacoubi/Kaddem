@@ -58,7 +58,7 @@ System.out.println(columns.length);
     }   }
 
     public static ByteArrayInputStream contratPDFReport(List<Contrat> contrats) {
-
+        Contrat con = new Contrat();
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
@@ -75,7 +75,7 @@ System.out.println(columns.length);
             Stream.of("Date Debut Contrat","Date Fin Contrat", "Montant","Nom","Prenom").forEach(headerTitle -> {
                 PdfPCell header = new PdfPCell();
                 com.itextpdf.text.Font headFont = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-                header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+                header.setBackgroundColor(BaseColor.MAGENTA);
 
                 header.setHorizontalAlignment(Element.ALIGN_CENTER);
                 header.setBorderWidth(1);
@@ -108,8 +108,8 @@ System.out.println(columns.length);
                 titleeCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 titleeCell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(titleeCell);
-                PdfPCell titleeCelll = new PdfPCell(new Phrase(cont.getMontantContrat()));
-                titleeCelll.setPaddingLeft(1);
+                String str = String.format("%d",cont.getMontantContrat());
+                PdfPCell titleeCelll = new PdfPCell(new Phrase(str+"dt"));                titleeCelll.setPaddingLeft(1);
                 titleeCelll.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 titleeCelll.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(titleeCelll);
@@ -130,10 +130,13 @@ else
                 desccCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 desccCell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(desccCell);
+            con=cont;
+
             }
+            System.out.println(con);
+            if(con.getArchive()==false) {
 
-            document.add(table);
-
+                document.add(table);}
             Image image2 = Image.getInstance("C:/Users/Cipher/IdeaProjects/Kaddemm/src/main/resources/Images/signature.png");
             image2.setAlignment(Element.ALIGN_BOTTOM);
             image2.setAlignment(Element.ALIGN_RIGHT);
@@ -250,7 +253,9 @@ else
                 titleeCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 titleeCell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(titleeCell);
-                PdfPCell titleeCelll = new PdfPCell(new Phrase(contrat.getMontantContrat()));
+            String str = String.format("%d",contrat.getMontantContrat());
+
+            PdfPCell titleeCelll = new PdfPCell(new Phrase(str));
                 titleeCelll.setPaddingLeft(1);
                 titleeCelll.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 titleeCelll.setHorizontalAlignment(Element.ALIGN_LEFT);

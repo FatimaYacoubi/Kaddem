@@ -38,11 +38,11 @@ public class PartenaireController {
         ipartenaireService.ajouterPartenaire(Par);
     }
 
-    @PutMapping("/updatePartenaire/{partenaire-id}")
+    @PutMapping("/updatePartenaire")
     @ResponseBody
     @CrossOrigin(origins = "http://localhost:4200")
-    public void updatePartenaire(@RequestBody Partenaire Par ,@PathVariable("partenaire-id") Long PartenairetId  ) {
-        ipartenaireService.updatePartenaire(Par, PartenairetId);
+    public void updatePartenaire(@RequestBody Partenaire Par ) {
+        ipartenaireService.updatePartenaire(Par);
     }
     @PostMapping (value = "/affectationPartenaireUniversite/{partenaire-id}")
     @ResponseBody

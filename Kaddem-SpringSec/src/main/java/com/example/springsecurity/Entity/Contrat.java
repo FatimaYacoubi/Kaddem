@@ -30,7 +30,7 @@ public class Contrat {
     private Etudiant etudiantC;
     @ManyToOne(cascade = {CascadeType.MERGE },fetch = FetchType.LAZY)
     private Entreprise  EntrepriseContrat;
-    private int montantContrat;
+   public int montantContrat;
     public double getComissionContrat()
     { double comission = montantContrat*0.4;
         return(comission);

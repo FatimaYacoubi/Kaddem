@@ -52,18 +52,14 @@ public class ContratController {
     EtudiantRepository etudiantRepository;
     @Autowired
     ExportContratService exportcontrat ;
-    @CrossOrigin(origins = "*")
-
     @PostMapping("/addContrat")
     @ResponseBody
-    public Contrat addContrat(@RequestBody Contrat contrat)
+    public ResponseEntity<InputStreamResource> addContrat(@RequestBody Contrat co)
     {
 
-        contratService.ajouter_contrat(contrat);
+        contratService.ajouter_contrat(co);
+        return null;
 
-
-
-        return (contrat);
     }
     @CrossOrigin(origins = "*")
 
@@ -83,10 +79,9 @@ public class ContratController {
     @CrossOrigin(origins = "*")
     @DeleteMapping("/deleteContrat/{idContrat}")
     @ResponseBody
-    public List<Contrat>deleteContrat(@PathVariable int idContrat)
+    public void deleteContrat(@PathVariable int idContrat)
     {
         contratrepo.deleteById(idContrat);
-        return contratrepo.findAll();
     }
     @CrossOrigin(origins = "*")
     @PostMapping("/detailContrat")
@@ -157,18 +152,9 @@ return contratService.getPercentageGroupBySpecialite();
 
         return status;
     }
-    @CrossOrigin(origins = "*")
 
     // Sending email with attachment
-    @PostMapping("/sendMailWithAttachment")
-    public String sendMailWithAttachment(
-            @RequestBody EmailEntrepriseContrat details)
-    {
-        String status
-                = emailService.sendMailWithAttachment(details);
 
-        return status;
-    }
 
     @GetMapping("/titi/{id}")
     public ResponseEntity<?> ShowUser(@PathVariable("id") Long id){

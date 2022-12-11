@@ -80,7 +80,7 @@ public class EntrepriseController {
 
     @GetMapping("/findAllEnPaginate")
 
-    public Response getContrats(@RequestParam Optional<String> Specialite,
+    public Response getEntreprises(@RequestParam Optional<String> Specialite,
                                 @RequestParam Optional<Integer> page,
                                 @RequestParam Optional<Integer> size)
     {
@@ -88,7 +88,7 @@ public class EntrepriseController {
         entreprises= entrepriseRepository.findAll(
                 PageRequest.of(
                         page.orElse(0),
-                        size.orElse(10)
+                        size.orElse(5)
                 )
         );
         Response res = new Response(entreprises.getContent(), entreprises.getTotalPages(),
