@@ -41,11 +41,11 @@ public class ProjetServiceImp implements IProjet {
     public Projet updateProjet(Projet p , Long idProjetdetail) {
         List<Projet> proj = retrieveAllProjets();
         ProjetDetail prodet = projetDetailRepository.findById(idProjetdetail).get();
-        p.setProjetDetail(prodet);
         for(Projet r:proj){
             if(r.getIdProjet()==p.getIdProjet()){
                 r.setSujet(p.getSujet());
                 r.setEtat(p.getEtat());
+                r.setProjetDetail(prodet);
                 projetRepository.save(r);
                 return r;
             }
