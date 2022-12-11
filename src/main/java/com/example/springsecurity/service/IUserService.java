@@ -1,6 +1,7 @@
 package com.example.springsecurity.service;
 
 import com.example.springsecurity.Entity.Etudiant;
+import org.springframework.data.domain.Page;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +31,12 @@ public interface IUserService {
     @Transactional
     void VerifyUser(String email, Boolean verif);
 
-    List<Etudiant> ShowAllStudent();
 
+
+    Page<Etudiant> ShowAllStudent(Optional<Integer> page, Optional<String> sortBy);
+
+
+    List<Etudiant> show();
 
     Etudiant FindbyId(Long id);
 

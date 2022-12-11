@@ -1,5 +1,6 @@
 package com.example.springsecurity.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;

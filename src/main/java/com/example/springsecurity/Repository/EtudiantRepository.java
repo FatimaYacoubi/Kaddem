@@ -39,4 +39,5 @@ public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     void VerifyUser(@Param("email")String email,@Param("verified") Boolean verified);
 
 
+
 }

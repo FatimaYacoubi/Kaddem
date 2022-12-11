@@ -1,11 +1,10 @@
 package com.example.springsecurity.Controller;
 
-import com.example.springsecurity.Entity.Etudiant;
-import com.example.springsecurity.Entity.Option;
-import com.example.springsecurity.Entity.Rolee;
-import com.example.springsecurity.Entity.StoragEtud;
+import com.example.springsecurity.Entity.*;
 import com.example.springsecurity.service.AuthenticationService;
 
+import com.example.springsecurity.service.ChatService;
+import com.example.springsecurity.service.ITache;
 import com.example.springsecurity.service.UserService;
 import com.example.springsecurity.util.FileUploadUtil;
 import com.example.springsecurity.util.SmsTwillio;
@@ -15,15 +14,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
+import javax.websocket.server.PathParam;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -34,11 +40,15 @@ import org.apache.commons.io.FilenameUtils;
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
-
+    @Autowired
+    private ITache tach;
     @Autowired
     private UserService userService;
     @Autowired
     ServletContext context;
+
+    @Autowired
+    private ChatService chatService;
 
     @GetMapping("/showuser/{id}")
     public ResponseEntity<?> ShowUser(@PathVariable("id") Long id){
@@ -89,14 +99,34 @@ public class AuthenticationController {
 
     @GetMapping("/show")
     public ResponseEntity<?> ShowAllUsers(){
-        userService.ShowAllStudent();
-        return new ResponseEntity<>(userService.ShowAllStudent(), HttpStatus.OK);
+        userService.show();
+        return new ResponseEntity<>(userService.show(), HttpStatus.OK);
     }
     @GetMapping(path="/image/{id}")
     public byte[] getPhoto(@PathVariable("id") Long id) throws Exception{
         Etudiant e   = userService.findById(id);
         return Files.readAllBytes(Paths.get("user-photos/"+e.getIdEtudiant()+"/"+e.getImage()));
     }
+
+
+    @MessageMapping("/resume")
+    @SendTo("/start/initial")
+    public ChatMessage chat(@Payload ChatMessage chat) {
+        chatService.add(chat);
+        System.out.println(chat.getContent());
+        return chat;
+    }
+    @PutMapping("/updatechat/{ids}/{id}")
+    public ResponseEntity<?> getchat(@RequestBody ChatMessage chat,@PathParam("ids") Long ids,@PathParam("id") Long id){
+         chatService.update(chat,ids,id);
+        return new ResponseEntity<>(chatService.update(chat,ids,id), HttpStatus.OK);
+    }
+    @GetMapping("/getchatbetwinsandr/{ids}/{idr}")
+    public ResponseEntity<?> getchat(@PathVariable("ids") Long ids,@PathVariable("idr") Long idr){
+        chatService.getbetwinsenderandreciver(ids,idr);
+        return new ResponseEntity<>(chatService.getbetwinsenderandreciver(ids,idr), HttpStatus.OK);
+    }
+
 
 
 

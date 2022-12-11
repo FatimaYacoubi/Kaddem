@@ -12,7 +12,7 @@ import javax.websocket.server.PathParam;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/user")
 public class TacheController {
     private ITache tach;
     @PostMapping("/addtach")
@@ -37,7 +37,7 @@ public class TacheController {
         return new ResponseEntity<>(tach.UpdateTache(T,id), HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> delete(@PathParam("id") Long id){
+    public ResponseEntity<?> delete(@PathVariable("id") Long id){
         tach.DeleteTache(id);
         return new ResponseEntity<>("done", HttpStatus.OK);
     }

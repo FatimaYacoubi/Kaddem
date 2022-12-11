@@ -12,6 +12,7 @@ import java.util.List;
 public class TachService implements ITache{
 
     private TachRepository tachRepository;
+    private IUserService user;
 
     @Override
     public Tache CreateTache(Tache T){
@@ -36,9 +37,6 @@ public class TachService implements ITache{
                     element.setName(e.getName());
                     element.setDescription(e.getDescription());
                     element.setType(e.getType());
-                    element.setStartDate(e.getStartDate());
-                    element.setEndDate(e.getEndDate());
-
                     return tachRepository.save(element);
                 })
                 .orElseGet(() -> {

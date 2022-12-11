@@ -9,6 +9,9 @@ import com.twilio.type.PhoneNumber;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -96,7 +99,18 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<Etudiant> ShowAllStudent(){
+    public Page<Etudiant> ShowAllStudent(Optional<Integer> page, Optional<String> sortBy){
+        return userRepository.findAll(
+                PageRequest.of(
+                        page.orElse(1),
+                        10,
+                        Sort.Direction.ASC, sortBy.orElse("idEtudiant")
+                )
+        );
+    }
+
+    @Override
+    public List<Etudiant> show(){
         return userRepository.findAll();
     }
 

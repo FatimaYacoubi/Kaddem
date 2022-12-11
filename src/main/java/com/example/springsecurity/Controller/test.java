@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -55,13 +56,13 @@ public class test {
     }
 
     @GetMapping("/showallusers")
-    public ResponseEntity<?> ShowAllUsers(){
-        userService.ShowAllStudent();
-        return new ResponseEntity<>(userService.ShowAllStudent(), HttpStatus.OK);
+    public ResponseEntity<?> ShowAllUsers(
+            @RequestParam Optional<Integer> page,
+            @RequestParam Optional<String> sortby
+    ){
+        userService.ShowAllStudent(page,sortby);
+        return new ResponseEntity<>(userService.ShowAllStudent(page,sortby), HttpStatus.OK);
     }
-
-
-
     @GetMapping("/getstatistic")
     public ResponseEntity<?> getstatic(){
         userService.Statistic();

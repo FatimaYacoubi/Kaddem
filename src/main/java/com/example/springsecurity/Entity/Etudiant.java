@@ -1,4 +1,6 @@
 package com.example.springsecurity.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.context.annotation.Lazy;
 
@@ -57,8 +59,16 @@ public class Etudiant implements Serializable {
     private Departement departement;
 
     @OneToMany(mappedBy = "etudiant")
+    @JsonBackReference
     private Set<Tache> tahces;
 
+    @OneToMany(mappedBy = "sender")
+    @JsonIgnore
+    private Set<ChatMessage> msg;
+
+    @OneToMany(mappedBy = "reciver")
+    @JsonIgnore
+    private Set<ChatMessage> resivermsg;
     // Constructeur et accesseurs (getters) et mutateurs (setters)
 
 
