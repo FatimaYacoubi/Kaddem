@@ -12,7 +12,7 @@ public interface IProjet {
 
     List<Projet> retrieveAllProjets();
 
-    Projet updateProjet(Projet p);
+    Projet updateProjet(Projet p,Long idProjetdetail);
 
     Projet retrieveProjet(Long idProjet);
 

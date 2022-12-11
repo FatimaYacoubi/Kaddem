@@ -38,8 +38,10 @@ public class ProjetServiceImp implements IProjet {
 
     @Override
     @Transactional
-    public Projet updateProjet(Projet p) {
+    public Projet updateProjet(Projet p , Long idProjetdetail) {
         List<Projet> proj = retrieveAllProjets();
+        ProjetDetail prodet = projetDetailRepository.findById(idProjetdetail).get();
+        p.setProjetDetail(prodet);
         for(Projet r:proj){
             if(r.getIdProjet()==p.getIdProjet()){
                 r.setSujet(p.getSujet());

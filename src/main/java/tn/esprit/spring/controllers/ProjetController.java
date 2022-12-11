@@ -34,11 +34,11 @@ public class ProjetController {
     }
 
 
-    @PutMapping("/updateProjet")
+    @PutMapping("/updateProjet/{idProjetdetail}")
     @ResponseBody
-    public Projet updateProjets(@RequestBody Projet projet)
+    public Projet updateProjets(@RequestBody Projet projet,@PathVariable Long idProjetdetail)
     {
-        iProjet.updateProjet(projet);
+        iProjet.updateProjet(projet,idProjetdetail);
         return  projet;
     }
 
