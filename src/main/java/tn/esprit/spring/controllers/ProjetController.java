@@ -2,11 +2,17 @@ package tn.esprit.spring.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entity.Projet;
+import tn.esprit.spring.entity.paginationprojet;
+import tn.esprit.spring.repositories.ProjetRepository;
 import tn.esprit.spring.services.IProjet;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin(origins ="*" )
 @RestController
 @RequestMapping("/ProjetC")
@@ -14,6 +20,9 @@ import java.util.List;
 public class ProjetController {
 
    private IProjet iProjet;
+
+   @Autowired
+    ProjetRepository projetRepository;
 
     @GetMapping("/getallProjets")
     @ResponseBody
@@ -58,6 +67,21 @@ public class ProjetController {
     }
 
 
+    @GetMapping("/findAllEPaginate")
 
+    public paginationprojet getContrats(@RequestParam Optional<Integer> page,  @RequestParam Optional<Integer> size)
+    {
+        Page<Projet> projets = null;
+        projets= projetRepository.findAll(
+                PageRequest.of(
+                        page.orElse(0),
+                        size.orElse(5)
+                )
+        );
+        paginationprojet res = new paginationprojet(projets.getContent(), projets.getTotalPages(),
+                projets.getNumber(), projets.getSize());
+
+        return res;
+    }
 
 }
